@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-02-13T13:16:29 WIB" name="Parallel Execution Suite" finished-at="2025-02-13T13:16:30 WIB" duration-ms="67">
+    <groups>
+    </groups>
+    <test started-at="2025-02-13T13:16:29 WIB" name="My Test Group" finished-at="2025-02-13T13:16:30 WIB" duration-ms="67">
+      <class name="ParallelTestNG">
+        <test-method signature="scenarioTest1()[pri:0, instance:ParallelTestNG@4278a03f]" started-at="2025-02-13T13:16:30 WIB" name="scenarioTest1" finished-at="2025-02-13T13:16:30 WIB" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- scenarioTest1 -->
+        <test-method signature="scenarioTest2()[pri:0, instance:ParallelTestNG@4278a03f]" started-at="2025-02-13T13:16:30 WIB" name="scenarioTest2" finished-at="2025-02-13T13:16:30 WIB" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- scenarioTest2 -->
+        <test-method signature="scenarioTest3()[pri:0, instance:ParallelTestNG@4278a03f]" started-at="2025-02-13T13:16:30 WIB" name="scenarioTest3" finished-at="2025-02-13T13:16:30 WIB" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- scenarioTest3 -->
+      </class> <!-- ParallelTestNG -->
+    </test> <!-- My Test Group -->
+  </suite> <!-- Parallel Execution Suite -->
+</testng-results>

@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name = "Parallel Execution Suite" parallel = "methods" thread-count = "3">
+<!-- parallel akan membuat test case dijalankan bareng2 gk berurutan -->
+  <test name = "My Test Group">
+  <parameter name = "program" value = "API Automation"/>
+    <classes>
+     <class name = "ParallelTestNG"/> <!-- ganti sesuai nama file -->
+    </classes>
+  </test>
+</suite>

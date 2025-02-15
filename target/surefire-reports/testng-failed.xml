@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite parallel="methods" name="Failed suite [Parallel Execution Suite]" guice-stage="DEVELOPMENT" verbose="0">
+  <test thread-count="5" parallel="methods" name="My Test Group(failed)" verbose="0">
+    <parameter name="program" value="API Automation"/>
+    <classes>
+      <class name="TestNG2">
+        <methods>
+          <include name="testRetry"/>
+        </methods>
+      </class> <!-- TestNG2 -->
+    </classes>
+  </test> <!-- My Test Group(failed) -->
+</suite> <!-- Failed suite [Parallel Execution Suite] -->
