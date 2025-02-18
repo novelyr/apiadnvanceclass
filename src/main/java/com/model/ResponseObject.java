@@ -45,7 +45,7 @@ public class ResponseObject {
   @JsonProperty("data")
   public DataItem data;
 
-  @JsonIgnoreProperties(ignoreUnknown = true)
+  // @JsonIgnoreProperties(ignoreUnknown = true)
   public static class DataItem {
 
     @JsonProperty("year")
