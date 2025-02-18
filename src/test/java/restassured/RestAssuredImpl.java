@@ -5,6 +5,14 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+// PR
+/*
+ * 1. tambahin assert pakai pojo di tiap API (ada 7 itu), tinggal tambahin
+ * annotaion @Test di tiap hit API
+ * 2. nanti ada scenario E2E baru, add object, update, delete
+ * 3. buat branch baru aja ? TestNG Rest?
+ */
+
 public class RestAssuredImpl {
   public static void main(String[] args) {
     // System.out.println("ini adalah novel ");
