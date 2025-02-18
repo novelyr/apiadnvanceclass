@@ -107,8 +107,12 @@ public class RestE2ETest {
                                 .when()
                                 .delete("{path}/{idProduct}");
                 System.out.println("delete product" + responseDelete.asPrettyString());
+                JsonPath addJsonPathDelete = responseDelete.jsonPath();
+                String actualDeleteMessage = addJsonPathDelete.getString("message");
+                String expectedDeleteMessage = String.format("Object with id = %s has been deleted.", idNewObject);
 
                 Assert.assertEquals(responseDelete.statusCode(), 200);
+                Assert.assertEquals(actualDeleteMessage, expectedDeleteMessage);
 
                 // 4th verify that the new ID is deleted, hit single get product
 
@@ -123,6 +127,11 @@ public class RestE2ETest {
 
                 System.out.println("single Product response after deleted: " + responseAfterDelete.asPrettyString());
 
+                JsonPath addJsonPathAfterDelete = responseAfterDelete.jsonPath();
+                String actualErrorMessage = addJsonPathAfterDelete.getString("error");
+                String expectedErrorMessage = String.format("Oject with id=%s was not found.", idNewObject);
+
                 Assert.assertEquals(responseAfterDelete.statusCode(), 404);
+                Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
         }
 }
