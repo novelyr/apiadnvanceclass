@@ -1,7 +1,6 @@
 package stepdefinitions;
 
 import java.util.List;
-import java.util.Map;
 
 import org.testng.Assert;
 
@@ -73,11 +72,17 @@ public class StepDefinitionsImpl {
     RequestSpecification requestSpecification = RestAssured
         .given();
 
-    for (Map.Entry<String, String> entry : dataRequest.addItemCollection().entrySet()) {
-      if (entry.getKey().equals(payload)) {
-        json = entry.getValue();
-        break;
-      }
+    // for (Map.Entry<String, String> entry :
+    // dataRequest.addItemCollection().entrySet()) {
+    // if (entry.getKey().equals(payload)) {
+    // json = entry.getValue();
+    // break;
+    // }
+    // }
+
+    json = dataRequest.addItemCollection().get(payload);
+    if (json == null) {
+      throw new IllegalArgumentException("Payload not found: " + payload);
     }
 
     Response response = requestSpecification
