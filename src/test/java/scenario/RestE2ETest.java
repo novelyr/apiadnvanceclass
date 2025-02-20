@@ -3,7 +3,7 @@ package scenario;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.model.ResponseObject;
+import com.model.response.ResponseObject;
 
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;

@@ -1,4 +1,4 @@
-package com.model;
+package com.model.response;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -46,7 +46,7 @@ public class ResponseObject {
   public DataItem data;
 
   // @JsonIgnoreProperties(ignoreUnknown = true)
-  public static class DataItem {
+  public class DataItem {
 
     @JsonProperty("year")
     public int year;

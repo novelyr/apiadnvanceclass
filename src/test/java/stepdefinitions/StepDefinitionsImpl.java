@@ -8,7 +8,8 @@ import org.testng.Assert;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.model.ResponseObject;
+import com.model.request.RequestItem;
+import com.model.response.ResponseObject;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -22,7 +23,7 @@ import resources.DataRequest;
 public class StepDefinitionsImpl {
 
   ResponseObject responseObject;
-  ResponseObject requestItem;
+  RequestItem requestItem;
   String idNewObject;
   DataRequest dataRequest;
   String json;
@@ -90,7 +91,7 @@ public class StepDefinitionsImpl {
     System.out.println("add product with CUCUMBER : " + response.asPrettyString());
 
     ObjectMapper requestAddItem = new ObjectMapper();
-    requestItem = requestAddItem.readValue(json, ResponseObject.class);
+    requestItem = requestAddItem.readValue(json, RequestItem.class);
 
     // Validation
     JsonPath addJsonPath = response.jsonPath();
