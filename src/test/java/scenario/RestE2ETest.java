@@ -135,3 +135,31 @@ public class RestE2ETest {
                 Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
         }
 }
+
+/*
+ * GHERKIN
+ * 1. feature
+ * - Given, When, Then, But, And
+ * 
+ * Checkout barang
+ * 
+ * - Given
+ * User di halaman cekout
+ * 
+ * When
+ * - action --> cekout item dst
+ * 
+ * Then
+ * - result --> berhasil cekout
+ * 
+ * And
+ * - line line berikutnya, kejadian di 1 cekpoint (given / when / then), instead
+ * of i.e. given given given, given and and. Kata sambung lah
+ * 
+ * But
+ * - mirip and, tapi kontradiktif
+ * 
+ * 2. step definition
+ * 3. runner
+ * 
+ */
