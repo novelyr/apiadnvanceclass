@@ -1,9 +1,13 @@
 package stepdefinitions;
 
 import java.util.List;
+import java.util.Map;
 
 import org.testng.Assert;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.ResponseObject;
 
 import io.cucumber.java.en.Given;
@@ -13,13 +17,17 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import resources.DataRequest;
 
 public class StepDefinitionsImpl {
 
   ResponseObject responseObject;
+  ResponseObject requestItem;
   String idNewObject;
+  DataRequest dataRequest;
+  String json;
 
-  @Given("A list of products are available")
+  @Given("Given A list of item are available")
   public void getAllProduct() {
     RestAssured.baseURI = "https://api.restful-api.dev/";
     RequestSpecification requestSpecification = RestAssured
@@ -54,26 +62,22 @@ public class StepDefinitionsImpl {
         "High-performance wireless noise cancelling headphones");
   }
 
-  @When("I add a new {string} to etalase")
-  public void addNewProduct2(String payload) {
-    System.out.println("Adding new product: " + payload);
-  }
+  @When("I add item to list {string}")
+  public void addNewProducts(String payload) throws JsonMappingException, JsonProcessingException {
+    // Implementation
+    dataRequest = new DataRequest();
 
-  @When("I add a new product to etalase")
-  public void addNewProduct() {
-    String json = "{\n" +
-        "   \"name\": \"NOVEL Apple MacBook Pro 16\",\n" +
-        "   \"data\": {\n" +
-        "      \"year\": 2025,\n" +
-        "      \"price\": 9849.99,\n" +
-        "      \"CPU model\": \"Intel Core i10\",\n" +
-        "      \"Hard disk size\": \"1 TB\"\n" +
-        "   }\n" +
-        "}";
-
+    // System.out.println("Add new product-1" + payload);
     RestAssured.baseURI = "https://api.restful-api.dev/";
     RequestSpecification requestSpecification = RestAssured
         .given();
+
+    for (Map.Entry<String, String> entry : dataRequest.addItemCollection().entrySet()) {
+      if (entry.getKey().equals(payload)) {
+        json = entry.getValue();
+        break;
+      }
+    }
 
     Response response = requestSpecification
         .log()
@@ -83,26 +87,27 @@ public class StepDefinitionsImpl {
         .contentType("application/json")
         .when()
         .post("{path}");
-    System.out.println("add product" + response.asPrettyString());
+    System.out.println("add product with CUCUMBER : " + response.asPrettyString());
 
+    ObjectMapper requestAddItem = new ObjectMapper();
+    requestItem = requestAddItem.readValue(json, ResponseObject.class);
+
+    // Validation
     JsonPath addJsonPath = response.jsonPath();
     responseObject = addJsonPath.getObject("", ResponseObject.class);
     idNewObject = responseObject.id;
 
     Assert.assertEquals(response.statusCode(), 200);
-
-    Assert.assertNotNull(idNewObject);
-    Assert.assertEquals(responseObject.name, "NOVEL Apple MacBook Pro 16");
-    Assert.assertNotNull(responseObject.createdAt);
-    Assert.assertNotNull(responseObject.data);
-    Assert.assertEquals(responseObject.data.year, 2025);
-    Assert.assertEquals(responseObject.data.price, 9849.99);
-    Assert.assertEquals(responseObject.data.cpuModel, "Intel Core i10");
-    Assert.assertEquals(responseObject.data.HDSize, "1 TB");
+    // Assert.assertEquals(responseObject.id, requestItem.id);
+    Assert.assertNotNull(responseObject.id);
+    Assert.assertEquals(responseObject.name, requestItem.name);
+    Assert.assertEquals(responseObject.data.year, requestItem.data.year);
+    Assert.assertEquals(responseObject.data.price, requestItem.data.price);
+    Assert.assertEquals(responseObject.data.cpuModel, requestItem.data.cpuModel);
 
   }
 
-  @Then("Product is available")
+  @Then("The item is available")
   public void getSingleProduct() {
 
     RestAssured.baseURI = "https://api.restful-api.dev/";

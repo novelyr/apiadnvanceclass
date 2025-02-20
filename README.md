@@ -1,4 +1,27 @@
-Task
+Task 2 (20 feb 2025)
+Implementation cucumber dengan kriteria berikut
+Feature
+Stepdefention
+Runner
+DataRequest
+Scenario Outline dan non outline
+Scenario cucumbernya:
+
+Scenario Outline: As a user I can add new data
+Given A list of item are available (get list of all objects)
+When I add item to list "<payload>" (Add object)
+Then The item is available (Single object)
+
+    Examples:
+    |payload    |
+    |addItem   |
+    |addItem2 |
+
+Note:
+Silahkan buat branch baru cucumber_impl
+
+<!-- tugas di bawah ini sudah selesai -->
+<!-- Task 1
 
 1. Implementasi validation menggunakan POJO di setiap endpoint yang ada di https://restful-api.dev/ (ada di file src/test/java/restassured/TugasRestAssuredPOJO.java)
 
@@ -16,4 +39,4 @@ Scenario Add Product
   2. Submission buat dalam satu branch jangan di merge ke master
 
 - ada di file src/test/java/scenario/RestE2ETest.java
-- branch tugas "testng_rest"
+- branch tugas "testng_rest" -->
