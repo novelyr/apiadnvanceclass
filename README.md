@@ -1,5 +1,6 @@
-mencoba refractor code
-baru selesai nambah feature update data
+Sudah selesai refractor code ke endpoint termasuk refractor assert
+file refractor ada di src/test/java/apiengine/restfulapidev
+file step definition setelah refractor ada di src/test/java/stepdefinitions/StepDefinitionsImpl.java
 
 <!-- tugas di bawah ini selesai
 Task 2 (20 feb 2025)
