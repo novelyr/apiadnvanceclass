@@ -11,6 +11,7 @@ import com.model.request.RequestItem;
 import com.model.response.ResponseObject;
 
 import apiengine.restfulapidev.Endpoints;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -26,10 +27,17 @@ public class StepDefinitionsImpl {
   String idProduct;
   DataRequest dataRequest;
   String json;
+  Endpoints endpoints;
+
+  // kalau ada problem, anotasi bisa diganti @BeforeStep
+  @Before
+  public void setUp() {
+    endpoints = new Endpoints();
+  }
 
   @Given("A list of item are available")
   public void getAllProduct() {
-    Response response = Endpoints.getAllProducts();
+    Response response = endpoints.getAllProducts("objects");
 
     System.out.println("Hasilnya adalah " + response.asPrettyString());
     JsonPath addJsonPath = response.jsonPath();
@@ -62,7 +70,7 @@ public class StepDefinitionsImpl {
       throw new IllegalArgumentException("Payload not found: " + payload);
     }
 
-    Response response = Endpoints.addNewProduct(json);
+    Response response = endpoints.addNewProduct("objects", json);
 
     System.out.println("add product with CUCUMBER : " + response.asPrettyString());
 
@@ -87,7 +95,7 @@ public class StepDefinitionsImpl {
   @And("The item is available")
   public void getSingleProduct() {
 
-    Response response = Endpoints.getSingleProduct(idProduct);
+    Response response = endpoints.getSingleProduct("objects", idProduct);
 
     System.out.println("single Product " + response.asPrettyString());
     JsonPath addJsonPath = response.jsonPath();
@@ -113,7 +121,7 @@ public class StepDefinitionsImpl {
       throw new IllegalArgumentException("Update not found: " + update);
     }
 
-    Response response = Endpoints.updateProduct(idProduct, json);
+    Response response = endpoints.updateProduct("objects", idProduct, json);
 
     System.out.println("update product with CUCUMBER : " + response.asPrettyString());
 
