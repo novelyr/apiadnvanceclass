@@ -27,7 +27,7 @@ public class StepDefinitionsImpl {
   DataRequest dataRequest;
   String json;
 
-  @Given("Given A list of item are available")
+  @Given("A list of item are available")
   public void getAllProduct() {
     RestAssured.baseURI = "https://api.restful-api.dev/";
     RequestSpecification requestSpecification = RestAssured
