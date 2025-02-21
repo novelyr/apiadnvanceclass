@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="32.839" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-02-21T13:19:12.550555392Z">
-<testcase classname="End to End simulation Test" name="As a user I can update data - #1.1" time="18.714">
+<testsuite name="Cucumber" time="53.81" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-02-21T13:49:29.704560038Z">
+<testcase classname="End to End simulation Test" name="As a user I can add data" time="7.216">
+<system-out><![CDATA[
+Given A list of item are available..........................................passed
+When I add a new product to etalase.........................................passed
+Then The item is available to show..........................................passed
+]]></system-out>
+</testcase>
+<testcase classname="End to End simulation Test" name="As a user I can add new data - #1.1" time="4.419">
+<system-out><![CDATA[
+Given A list of item are available..........................................passed
+When I add item to list "addItem"...........................................passed
+Then The item is available to show..........................................passed
+]]></system-out>
+</testcase>
+<testcase classname="End to End simulation Test" name="As a user I can add new data - #1.2" time="4.96">
+<system-out><![CDATA[
+Given A list of item are available..........................................passed
+When I add item to list "addItem2"..........................................passed
+Then The item is available to show..........................................passed
+]]></system-out>
+</testcase>
+<testcase classname="End to End simulation Test" name="As a user I can update data - #1.1" time="7.523">
 <system-out><![CDATA[
 Given A list of item are available..........................................passed
 When I add item to list "addItem"...........................................passed
@@ -8,7 +29,7 @@ And The item is available...................................................pass
 Then I can update item "updateItem".........................................passed
 ]]></system-out>
 </testcase>
-<testcase classname="End to End simulation Test" name="As a user I can update data - #1.2" time="13.905">
+<testcase classname="End to End simulation Test" name="As a user I can update data - #1.2" time="29.363">
 <system-out><![CDATA[
 Given A list of item are available..........................................passed
 When I add item to list "addItem2"..........................................passed

@@ -65,6 +65,11 @@ public class StepDefinitionsImpl {
         "High-performance wireless noise cancelling headphones");
   }
 
+  @When("I add a new product to etalase")
+  public void addNewProductToEtalase() throws JsonMappingException, JsonProcessingException {
+    addNewProducts("addItem");
+  }
+
   @When("I add item to list {string}")
   public void addNewProducts(String payload) throws JsonMappingException, JsonProcessingException {
     // Implementation
@@ -91,6 +96,7 @@ public class StepDefinitionsImpl {
   }
 
   @And("The item is available")
+  @Then("The item is available to show")
   public void getSingleProduct() {
 
     Response response = endpoints.getSingleProduct("objects", idProduct);
