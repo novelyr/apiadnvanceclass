@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.request.RequestItem;
 import com.model.response.ResponseObject;
 
+import apiengine.restfulapidev.Assertions;
 import apiengine.restfulapidev.Endpoints;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -28,11 +29,13 @@ public class StepDefinitionsImpl {
   DataRequest dataRequest;
   String json;
   Endpoints endpoints;
+  Assertions assertions;
 
   // kalau ada problem, anotasi bisa diganti @BeforeStep
   @Before
   public void setUp() {
     endpoints = new Endpoints();
+    assertions = new Assertions();
   }
 
   @Given("A list of item are available")
@@ -83,12 +86,7 @@ public class StepDefinitionsImpl {
     idProduct = responseObject.id;
 
     Assert.assertEquals(response.statusCode(), 200);
-    // Assert.assertEquals(responseObject.id, requestItem.id);
-    Assert.assertNotNull(responseObject.id);
-    Assert.assertEquals(responseObject.name, requestItem.name);
-    Assert.assertEquals(responseObject.data.year, requestItem.data.year);
-    Assert.assertEquals(responseObject.data.price, requestItem.data.price);
-    Assert.assertEquals(responseObject.data.cpuModel, requestItem.data.cpuModel);
+    assertions.assertAddProduct(responseObject, requestItem);
 
   }
 
@@ -103,14 +101,8 @@ public class StepDefinitionsImpl {
 
     Assert.assertEquals(response.statusCode(), 200);
     Assert.assertEquals(responseObject.id, idProduct);
+    assertions.assertAddProduct(responseObject, requestItem);
 
-    Assert.assertEquals(response.statusCode(), 200);
-    Assert.assertEquals(responseObject.id, idProduct);
-    Assert.assertNotNull(responseObject.data);
-    Assert.assertEquals(responseObject.name, requestItem.name);
-    Assert.assertEquals(responseObject.data.year, requestItem.data.year);
-    Assert.assertEquals(responseObject.data.price, requestItem.data.price);
-    Assert.assertEquals(responseObject.data.cpuModel, requestItem.data.cpuModel);
   }
 
   @Then("I can update item {string}")
@@ -135,12 +127,6 @@ public class StepDefinitionsImpl {
 
     Assert.assertEquals(response.statusCode(), 200);
     // Assert.assertEquals(responseObject.id, requestItem.id);
-    Assert.assertNotNull(responseObject.id);
-    Assert.assertNotNull(responseObject.updatedAt);
-    Assert.assertEquals(responseObject.name, requestItem.name);
-    Assert.assertEquals(responseObject.data.year, requestItem.data.year);
-    Assert.assertEquals(responseObject.data.price, requestItem.data.price);
-    Assert.assertEquals(responseObject.data.cpuModel, requestItem.data.cpuModel);
-
+    assertions.assertUpdateProduct(responseObject, requestItem);
   }
 }

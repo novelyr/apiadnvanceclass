@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="7.376" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-02-21T04:02:27.524171840Z">
-<testcase classname="End to End simulation Test" name="As a user I can update data - #1.1" time="5.828">
+<testsuite name="Cucumber" time="32.839" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-02-21T13:19:12.550555392Z">
+<testcase classname="End to End simulation Test" name="As a user I can update data - #1.1" time="18.714">
 <system-out><![CDATA[
 Given A list of item are available..........................................passed
 When I add item to list "addItem"...........................................passed
@@ -8,7 +8,7 @@ And The item is available...................................................pass
 Then I can update item "updateItem".........................................passed
 ]]></system-out>
 </testcase>
-<testcase classname="End to End simulation Test" name="As a user I can update data - #1.2" time="1.176">
+<testcase classname="End to End simulation Test" name="As a user I can update data - #1.2" time="13.905">
 <system-out><![CDATA[
 Given A list of item are available..........................................passed
 When I add item to list "addItem2"..........................................passed
