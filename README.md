@@ -2,6 +2,10 @@ Sudah selesai refractor code ke endpoint termasuk refractor assert
 file refractor ada di src/test/java/apiengine/restfulapidev
 file step definition setelah refractor ada di src/test/java/stepdefinitions/StepDefinitionsImpl.java
 
+tugas 1 di testng_rest
+tugas 2 di cucumber_impl
+tugas 3 di refractor-code
+
 <!-- tugas di bawah ini selesai
 Task 2 (20 feb 2025)
 Implementation cucumber dengan kriteria berikut
