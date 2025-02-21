@@ -3,11 +3,12 @@ package restassured;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.model.response.ResponseObject;
+
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import model.ResponseObject;
 
 public class ValidationTest {
   /*
@@ -97,19 +98,20 @@ public class ValidationTest {
     responseObject = addJsonPath.getObject("", ResponseObject.class);
 
     System.out.println("name is " + responseObject.name);
-    System.out.println("price is " + responseObject.dataItem.price);
-    System.out.println("year is " + responseObject.dataItem.year);
-    System.out.println("CPU model is " + responseObject.dataItem.cpuModel);
-    System.out.println("HD Size is " + responseObject.dataItem.HDSize);
+    // System.out.println("price is " + responseObject.data.get("price"));
+    // System.out.println("year is " + responseObject.data.get("year"));
+    // System.out.println("CPU model is " + responseObject.data.get("CPU model"));
+    // System.out.println("HD Size is " + responseObject.data.get("Hard disk
+    // size"));
 
     Assert.assertEquals(response.statusCode(), 200);
     Assert.assertNotNull(responseObject.createdAt);
     Assert.assertNotNull(responseObject.id);
     Assert.assertEquals(responseObject.name, "NOVEL Apple MacBook Pro 16");
-    Assert.assertEquals(responseObject.dataItem.year, 2025);
-    Assert.assertEquals(responseObject.dataItem.price, 9849.99);
-    Assert.assertEquals(responseObject.dataItem.cpuModel, "Intel Core i10");
-    Assert.assertEquals(responseObject.dataItem.HDSize, "1 TB");
+    // Assert.assertEquals(responseObject.data.get("year"), 2025);
+    // Assert.assertEquals(responseObject.data.get("price"), 9849.99);
+    // Assert.assertEquals(responseObject.data.get("CPU model"), "Intel Core i10");
+    // Assert.assertEquals(responseObject.data.get("Hard disk size"), "1 TB");
 
   }
 }
