@@ -124,22 +124,23 @@ public class StepDefinitionsImpl {
         .log()
         .all()
         .pathParam("path", "objects")
-        .pathParam("idProduct", 7)
+        .pathParam("idProduct", idNewObject)
         .when()
         .get("{path}/{idProduct}");
 
-    System.out.println("single Product " + response.asPrettyString());
+    System.out.println("Get Single Product " + response.asPrettyString());
+
+    // Validation
     JsonPath addJsonPath = response.jsonPath();
     responseObject = addJsonPath.getObject("", ResponseObject.class);
 
     Assert.assertEquals(response.statusCode(), 200);
-    Assert.assertEquals(responseObject.id, "7");
-    Assert.assertEquals(responseObject.name, "Apple MacBook Pro 16");
+    Assert.assertEquals(responseObject.id, idNewObject);
     Assert.assertNotNull(responseObject.data);
-    Assert.assertEquals(responseObject.data.year, 2019);
-    Assert.assertEquals(responseObject.data.price, 1849.99);
-    Assert.assertEquals(responseObject.data.cpuModel, "Intel Core i9");
-    Assert.assertEquals(responseObject.data.HDSize, "1 TB");
+    Assert.assertEquals(responseObject.name, requestItem.name);
+    Assert.assertEquals(responseObject.data.year, requestItem.data.year);
+    Assert.assertEquals(responseObject.data.price, requestItem.data.price);
+    Assert.assertEquals(responseObject.data.cpuModel, requestItem.data.cpuModel);
   }
 
 }
