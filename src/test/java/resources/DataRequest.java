@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DataRequest {
-  public Map<String, String> addItemCollection() {
+  public static Map<String, String> addItemCollection() {
     Map<String, String> dataCollection = new HashMap<>();
     dataCollection.put("addItem", "{\n" +
         "   \"name\": \"NOVEL Apple MacBook Pro 16\",\n" +
@@ -29,7 +29,7 @@ public class DataRequest {
     return dataCollection;
   }
 
-  public Map<String, String> updateItemCollection() {
+  public static Map<String, String> updateItemCollection() {
     Map<String, String> dataCollection = new HashMap<>();
     dataCollection.put("updateItem", "{\n" +
         "   \"name\": \"Updated NOVEL Apple MacBook Pro 16\",\n" +

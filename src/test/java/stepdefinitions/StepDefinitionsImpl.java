@@ -10,35 +10,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.request.RequestItem;
 import com.model.response.ResponseObject;
 
+import apiengine.restfulapidev.Endpoints;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import resources.DataRequest;
 
 public class StepDefinitionsImpl {
 
   ResponseObject responseObject;
   RequestItem requestItem;
-  String idNewObject;
+  String idProduct;
   DataRequest dataRequest;
   String json;
 
   @Given("A list of item are available")
   public void getAllProduct() {
-    RestAssured.baseURI = "https://api.restful-api.dev/";
-    RequestSpecification requestSpecification = RestAssured
-        .given();
-
-    Response response = requestSpecification
-        .log()
-        .all()
-        .when()
-        .get("objects");
+    Response response = Endpoints.getAllProducts();
 
     System.out.println("Hasilnya adalah " + response.asPrettyString());
     JsonPath addJsonPath = response.jsonPath();
@@ -66,34 +57,13 @@ public class StepDefinitionsImpl {
   @When("I add item to list {string}")
   public void addNewProducts(String payload) throws JsonMappingException, JsonProcessingException {
     // Implementation
-    dataRequest = new DataRequest();
-
-    // System.out.println("Add new product-1" + payload);
-    RestAssured.baseURI = "https://api.restful-api.dev/";
-    RequestSpecification requestSpecification = RestAssured
-        .given();
-
-    // for (Map.Entry<String, String> entry :
-    // dataRequest.addItemCollection().entrySet()) {
-    // if (entry.getKey().equals(payload)) {
-    // json = entry.getValue();
-    // break;
-    // }
-    // }
-
-    json = dataRequest.addItemCollection().get(payload);
+    json = DataRequest.addItemCollection().get(payload);
     if (json == null) {
       throw new IllegalArgumentException("Payload not found: " + payload);
     }
 
-    Response response = requestSpecification
-        .log()
-        .all()
-        .pathParam("path", "objects")
-        .body(json)
-        .contentType("application/json")
-        .when()
-        .post("{path}");
+    Response response = Endpoints.addNewProduct(json);
+
     System.out.println("add product with CUCUMBER : " + response.asPrettyString());
 
     ObjectMapper requestAddItem = new ObjectMapper();
@@ -102,7 +72,7 @@ public class StepDefinitionsImpl {
     // Validation
     JsonPath addJsonPath = response.jsonPath();
     responseObject = addJsonPath.getObject("", ResponseObject.class);
-    idNewObject = responseObject.id;
+    idProduct = responseObject.id;
 
     Assert.assertEquals(response.statusCode(), 200);
     // Assert.assertEquals(responseObject.id, requestItem.id);
@@ -117,24 +87,14 @@ public class StepDefinitionsImpl {
   @And("The item is available")
   public void getSingleProduct() {
 
-    RestAssured.baseURI = "https://api.restful-api.dev/";
-    RequestSpecification requestSpecification = RestAssured
-        .given();
-
-    Response response = requestSpecification
-        .log()
-        .all()
-        .pathParam("path", "objects")
-        .pathParam("idProduct", 7)
-        .when()
-        .get("{path}/{idProduct}");
+    Response response = Endpoints.getSingleProduct(idProduct);
 
     System.out.println("single Product " + response.asPrettyString());
     JsonPath addJsonPath = response.jsonPath();
     responseObject = addJsonPath.getObject("", ResponseObject.class);
 
     Assert.assertEquals(response.statusCode(), 200);
-    Assert.assertEquals(responseObject.id, "7");
+    Assert.assertEquals(responseObject.id, idProduct);
     Assert.assertEquals(responseObject.name, "Apple MacBook Pro 16");
     Assert.assertNotNull(responseObject.data);
     Assert.assertEquals(responseObject.data.year, 2019);
@@ -146,35 +106,13 @@ public class StepDefinitionsImpl {
   @Then("I can update item {string}")
   public void updateProducts(String update) throws JsonMappingException, JsonProcessingException {
     // Implementation
-    dataRequest = new DataRequest();
-
-    // System.out.println("Add new product-1" + update);
-    RestAssured.baseURI = "https://api.restful-api.dev/";
-    RequestSpecification requestSpecification = RestAssured
-        .given();
-
-    // for (Map.Entry<String, String> entry :
-    // dataRequest.addItemCollection().entrySet()) {
-    // if (entry.getKey().equals(update)) {
-    // json = entry.getValue();
-    // break;
-    // }
-    // }
-
-    json = dataRequest.updateItemCollection().get(update);
+    json = DataRequest.updateItemCollection().get(update);
     if (json == null) {
       throw new IllegalArgumentException("Update not found: " + update);
     }
 
-    Response response = requestSpecification
-        .log()
-        .all()
-        .pathParam("path", "objects")
-        .pathParam("idProduct", idNewObject)
-        .body(json)
-        .contentType("application/json")
-        .when()
-        .put("{path}/{idProduct}");
+    Response response = Endpoints.updateProduct(idProduct, json);
+
     System.out.println("update product with CUCUMBER : " + response.asPrettyString());
 
     ObjectMapper requestAddItem = new ObjectMapper();
@@ -183,7 +121,7 @@ public class StepDefinitionsImpl {
     // Validation
     JsonPath addJsonPath = response.jsonPath();
     responseObject = addJsonPath.getObject("", ResponseObject.class);
-    idNewObject = responseObject.id;
+    idProduct = responseObject.id;
 
     Assert.assertEquals(response.statusCode(), 200);
     // Assert.assertEquals(responseObject.id, requestItem.id);
