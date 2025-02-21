@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.request.RequestItem;
 import com.model.response.ResponseObject;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -113,7 +114,7 @@ public class StepDefinitionsImpl {
 
   }
 
-  @Then("The item is available")
+  @And("The item is available")
   public void getSingleProduct() {
 
     RestAssured.baseURI = "https://api.restful-api.dev/";
@@ -142,4 +143,56 @@ public class StepDefinitionsImpl {
     Assert.assertEquals(responseObject.data.HDSize, "1 TB");
   }
 
+  @Then("I can update item {string}")
+  public void updateProducts(String update) throws JsonMappingException, JsonProcessingException {
+    // Implementation
+    dataRequest = new DataRequest();
+
+    // System.out.println("Add new product-1" + update);
+    RestAssured.baseURI = "https://api.restful-api.dev/";
+    RequestSpecification requestSpecification = RestAssured
+        .given();
+
+    // for (Map.Entry<String, String> entry :
+    // dataRequest.addItemCollection().entrySet()) {
+    // if (entry.getKey().equals(update)) {
+    // json = entry.getValue();
+    // break;
+    // }
+    // }
+
+    json = dataRequest.updateItemCollection().get(update);
+    if (json == null) {
+      throw new IllegalArgumentException("Update not found: " + update);
+    }
+
+    Response response = requestSpecification
+        .log()
+        .all()
+        .pathParam("path", "objects")
+        .pathParam("idProduct", idNewObject)
+        .body(json)
+        .contentType("application/json")
+        .when()
+        .put("{path}/{idProduct}");
+    System.out.println("update product with CUCUMBER : " + response.asPrettyString());
+
+    ObjectMapper requestAddItem = new ObjectMapper();
+    requestItem = requestAddItem.readValue(json, RequestItem.class);
+
+    // Validation
+    JsonPath addJsonPath = response.jsonPath();
+    responseObject = addJsonPath.getObject("", ResponseObject.class);
+    idNewObject = responseObject.id;
+
+    Assert.assertEquals(response.statusCode(), 200);
+    // Assert.assertEquals(responseObject.id, requestItem.id);
+    Assert.assertNotNull(responseObject.id);
+    Assert.assertNotNull(responseObject.updatedAt);
+    Assert.assertEquals(responseObject.name, requestItem.name);
+    Assert.assertEquals(responseObject.data.year, requestItem.data.year);
+    Assert.assertEquals(responseObject.data.price, requestItem.data.price);
+    Assert.assertEquals(responseObject.data.cpuModel, requestItem.data.cpuModel);
+
+  }
 }
