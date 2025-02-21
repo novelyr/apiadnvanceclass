@@ -1,43 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="4.609" tests="2" skipped="0" failures="2" errors="0" timestamp="2025-02-21T03:01:39.235121372Z">
-<testcase classname="End to End simulation Test" name="As a user I can update data - #1.1" time="3.356">
-<failure type="java.lang.AssertionError" message="expected [Apple MacBook Pro 16] but found [NOVEL Apple MacBook Pro 16]">
-<![CDATA[java.lang.AssertionError: expected [Apple MacBook Pro 16] but found [NOVEL Apple MacBook Pro 16]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1578)
-	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
-	at org.testng.Assert.assertEquals(Assert.java:132)
-	at org.testng.Assert.assertEquals(Assert.java:656)
-	at org.testng.Assert.assertEquals(Assert.java:666)
-	at stepdefinitions.StepDefinitionsImpl.getSingleProduct(StepDefinitionsImpl.java:98)
-	at ✽.The item is available(file:///home/novelyr/QA/apiadnvanceclass/src/test/resources/features/ScenarioProducts.feature:23)
-]]>
-</failure>
+<testsuite name="Cucumber" time="3.537" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-02-21T03:16:03.428286904Z">
+<testcase classname="End to End simulation Test" name="As a user I can update data - #1.1" time="2.251">
 <system-out><![CDATA[
 Given A list of item are available..........................................passed
 When I add item to list "addItem"...........................................passed
-And The item is available...................................................failed
-Then I can update item "updateItem".........................................skipped
+And The item is available...................................................passed
+Then I can update item "updateItem".........................................passed
 ]]></system-out>
 </testcase>
-<testcase classname="End to End simulation Test" name="As a user I can update data - #1.2" time="0.931">
-<failure type="java.lang.AssertionError" message="expected [Apple MacBook Pro 16] but found [2 NOVEL Apple MacBook Pro 16]">
-<![CDATA[java.lang.AssertionError: expected [Apple MacBook Pro 16] but found [2 NOVEL Apple MacBook Pro 16]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1578)
-	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
-	at org.testng.Assert.assertEquals(Assert.java:132)
-	at org.testng.Assert.assertEquals(Assert.java:656)
-	at org.testng.Assert.assertEquals(Assert.java:666)
-	at stepdefinitions.StepDefinitionsImpl.getSingleProduct(StepDefinitionsImpl.java:98)
-	at ✽.The item is available(file:///home/novelyr/QA/apiadnvanceclass/src/test/resources/features/ScenarioProducts.feature:23)
-]]>
-</failure>
+<testcase classname="End to End simulation Test" name="As a user I can update data - #1.2" time="1.045">
 <system-out><![CDATA[
 Given A list of item are available..........................................passed
 When I add item to list "addItem2"..........................................passed
-And The item is available...................................................failed
-Then I can update item "updateItem2"........................................skipped
+And The item is available...................................................passed
+Then I can update item "updateItem2"........................................passed
 ]]></system-out>
 </testcase>
 </testsuite>
